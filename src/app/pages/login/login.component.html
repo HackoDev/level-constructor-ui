@@ -1,0 +1,18 @@
+<form class="example-form" (ngSubmit)="doLogin()">
+  <mat-form-field class="example-full-width">
+    <input matInput type="text" placeholder="Login" name="username"
+           [(ngModel)]="credentials.login">
+  </mat-form-field>
+  <app-error-list *ngIf="errors && errors.login"
+                  [errors]="errors.login"></app-error-list>
+
+  <mat-form-field class="example-full-width">
+    <input matInput type="text" placeholder="Password" name="password"
+           [(ngModel)]="credentials.password">
+  </mat-form-field>
+  <app-error-list *ngIf="errors && errors.password"
+                  [errors]="errors.password"></app-error-list>
+
+  <button mat-raised-button [disabled]="disabled" (click)="doLogin()">Login
+  </button>
+</form>

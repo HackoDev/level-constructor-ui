@@ -1,0 +1,9 @@
+export { HomeComponent } from './home/home.component';
+export { GamesComponent } from './games/games.component';
+export { AboutComponent } from './about/about.component';
+export { FormatsComponent } from './formats/formats.component';
+export { GameEditComponent } from './game-edit/game-edit.component';
+export { GameConstructorComponent } from './game-constructor/game-constructor.component';
+export { GameAddComponent } from './game-add/game-add.component';
+export { LoginComponent } from './login/login.component';
+export { LogoutComponent } from './logout/logout.component';

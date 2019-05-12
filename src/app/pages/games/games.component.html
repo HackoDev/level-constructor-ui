@@ -1,0 +1,17 @@
+<h1>Games</h1>
+<a mat-raised-button color="primary" [routerLink]="['/games', 'add']">Add Location</a>
+<mat-list>
+  <mat-list-item *ngFor="let game of paginator.records">
+    <mat-icon matListIcon>folder</mat-icon>
+    <h3 matLine>
+      <a [routerLink]="['/games', game.id, 'constructor']">{{ game.title }}</a>
+    </h3>
+    <p matLine>
+      <span>Локаций: </span>
+      <span class="demo-2"> {{ game.locations }} </span>
+    </p>
+    <a [routerLink]="['/games', game.id, 'edit']">
+      <mat-icon>edit</mat-icon>
+    </a>
+  </mat-list-item>
+</mat-list>
