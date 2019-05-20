@@ -1,0 +1,28 @@
+.node {
+  cursor: pointer;
+  transition: stroke-width 0.1s ease-out,
+  fill 0.1s ease-out,
+  stroke 0.1s ease-out;
+  stroke: white;
+  stroke-width: 0.25;
+}
+
+g {
+  .node-name {
+    //display: none;
+    font-family: 'Hel';
+    text-anchor: middle;
+    alignment-baseline: central;
+    font-weight: 300;
+    font-size: 18px;
+    fill: #000;
+    cursor: pointer;
+
+  }
+
+  &:hover {
+    .node-name {
+      display: block;
+    }
+  }
+}

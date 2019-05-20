@@ -2,13 +2,12 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 
-import { IGame } from "../../models";
 
 @Injectable()
 export abstract class BaseAPIService {
   abstract sourceUrl: string;
 
-  constructor(private client: HttpClient) {
+  constructor(protected client: HttpClient) {
   }
 
   public getListUrl() {
@@ -28,16 +27,16 @@ export abstract class BaseAPIService {
     return this.client.get(this.getListUrl(), {params: params});
   }
 
-  public doCreateApiCall(params: object): Observable<IGame> {
-    return this.client.post<IGame>(this.getListUrl(), params);
+  public doCreateApiCall(params: object) {
+    return this.client.post(this.getListUrl(), params);
   }
 
-  public doRetrieveApiCall(id: number): Observable<IGame> {
-    return this.client.get<IGame>(this.getObjectUrl(id));
+  public doRetrieveApiCall(id: number) {
+    return this.client.get(this.getObjectUrl(id));
   }
 
-  public doUpdateApiCall(id: number, params: object): Observable<IGame> {
-    return this.client.patch<IGame>(this.getObjectUrl(id), params);
+  public doUpdateApiCall(id: number, params: object) {
+    return this.client.patch(this.getObjectUrl(id), params);
   }
 
   public doDeleteApiCall(id: number): Observable<null> {

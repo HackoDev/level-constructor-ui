@@ -1,3 +1,10 @@
 export { IAuthObject } from './auth';
 export { IUser } from './users';
 export { IGame } from './games';
+export { IExtendedGame } from './games';
+export { ForceDirectedGraph } from './force-directed-graph';
+export { D3Node } from './node';
+export { D3Link } from './link';
+export { DeleteDialogData } from './delete-dialog-data';
+export { NodePropertiesDialogData } from './node-properties-dialog-data';
+export { LinkPropertiesDialogData } from './link-properties-dialog-data';

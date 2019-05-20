@@ -7,7 +7,7 @@
                   [errors]="errors.login"></app-error-list>
 
   <mat-form-field class="example-full-width">
-    <input matInput type="text" placeholder="Password" name="password"
+    <input matInput type="password" placeholder="Password" name="password"
            [(ngModel)]="credentials.password">
   </mat-form-field>
   <app-error-list *ngIf="errors && errors.password"

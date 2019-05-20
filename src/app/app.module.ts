@@ -11,8 +11,10 @@ import { environment } from "../environments/environment";
 import { AppRoutingModule } from "./app-routing.module";
 import * as appComponents from './components';
 import * as appPages from './pages';
+import { D3Service } from './services/d3.service';
 import * as apiServices from './services/api';
 import * as authServices from './services/auth';
+import * as appDirectives from "./directives";
 
 @NgModule({
   declarations: [
@@ -20,6 +22,11 @@ import * as authServices from './services/auth';
     appComponents.NavbarComponent,
     appComponents.GameFormComponent,
     appComponents.ErrorListComponent,
+    appComponents.NodeVisualComponent,
+    appComponents.LinkVisualComponent,
+    appComponents.GraphComponent,
+    appComponents.NodePropertiesComponent,
+    appComponents.LinkPropertiesComponent,
 
     appPages.HomeComponent,
     appPages.GamesComponent,
@@ -30,6 +37,9 @@ import * as authServices from './services/auth';
     appPages.GameConstructorComponent,
     appPages.GameAddComponent,
     appPages.LogoutComponent,
+
+    appDirectives.ZoomableDirective,
+    appDirectives.DraggableDirective,
   ],
   imports: [
     FormsModule,
@@ -56,13 +66,20 @@ import * as authServices from './services/auth';
     materialModules.MatFormFieldModule,
     materialModules.MatCommonModule,
     materialModules.MatInputModule,
+    materialModules.MatDialogModule,
 
     AppRoutingModule,
+  ],
+  entryComponents: [
+    appComponents.NodePropertiesComponent,
+    appComponents.LinkPropertiesComponent,
   ],
   providers: [
     apiServices.GamesApiService,
     apiServices.LocationsApiService,
     apiServices.TransitionsApiService,
+
+    D3Service,
 
     authServices.AuthService,
     authServices.AuthGuardService,

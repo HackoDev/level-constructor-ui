@@ -1,12 +1,16 @@
-<form class="example-form">
+<form (ngSubmit)="saveChanges(gameForm)" #gameForm="ngForm">
   <div>
     <mat-form-field class="example-full-width">
-      <input matInput type="text" placeholder="Title" value="">
+      <input matInput type="text" placeholder="Title" required
+             name="title" [(ngModel)]="instance.title">
     </mat-form-field>
   </div>
 
   <mat-form-field class="example-full-width">
-    <textarea matInput placeholder="Leave a description"></textarea>
+    <textarea matInput placeholder="Leave a description" required
+              name="description" [(ngModel)]="instance.description"></textarea>
   </mat-form-field>
+
+  <button mat-raised-button color="default">Save</button>
 
 </form>
