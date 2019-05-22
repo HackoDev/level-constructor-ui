@@ -12,6 +12,7 @@ import { AppRoutingModule } from "./app-routing.module";
 import * as appComponents from './components';
 import * as appPages from './pages';
 import { D3Service } from './services/d3.service';
+import { ParserService } from "./services/parser.service";
 import * as apiServices from './services/api';
 import * as authServices from './services/auth';
 import * as appDirectives from "./directives";
@@ -27,6 +28,8 @@ import * as appDirectives from "./directives";
     appComponents.GraphComponent,
     appComponents.NodePropertiesComponent,
     appComponents.LinkPropertiesComponent,
+    appComponents.GameStateComponent,
+    appComponents.StateFormPropertyComponent,
 
     appPages.HomeComponent,
     appPages.GamesComponent,
@@ -73,13 +76,16 @@ import * as appDirectives from "./directives";
   entryComponents: [
     appComponents.NodePropertiesComponent,
     appComponents.LinkPropertiesComponent,
+    appComponents.StateFormPropertyComponent,
   ],
   providers: [
     apiServices.GamesApiService,
     apiServices.LocationsApiService,
     apiServices.TransitionsApiService,
+    apiServices.ConfigApiService,
 
     D3Service,
+    ParserService,
 
     authServices.AuthService,
     authServices.AuthGuardService,

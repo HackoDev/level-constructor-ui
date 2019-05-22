@@ -1,11 +1,19 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import {
+  ConfigApiService,
   GamesApiService,
   LocationsApiService,
   TransitionsApiService
 } from "../../services/api";
-import { D3Link, D3Node, IExtendedGame, IGame } from "../../models";
+import {
+  D3Link,
+  D3Node,
+  IConfig,
+  IExtendedGame,
+  IGame,
+  IStateChanges
+} from "../../models";
 import {
   GraphComponent,
   LinkPropertiesComponent,
@@ -14,6 +22,7 @@ import {
 import { MatDialog } from "@angular/material";
 import { INodeMetadata } from "../../models/node";
 import { ILinkMetadata } from "../../models/link";
+import { ParserService } from "../../services/parser.service";
 
 @Component({
   selector: 'app-game-constructor',
@@ -28,14 +37,17 @@ export class GameConstructorComponent implements OnInit {
   public loaded: boolean = false;
   public transitionMode: boolean = false;
   public transitionNode: D3Node = null;
-  nodes: D3Node[] = [];
-  links: D3Link[] = [];
+  public state_name: string = '';
+
+  public nodes: D3Node[] = [];
+  public links: D3Link[] = [];
 
   constructor(private route: ActivatedRoute,
               private api: GamesApiService,
               private locationApi: LocationsApiService,
               private transitionApi: TransitionsApiService,
-              public dialog: MatDialog) {
+              public parser: ParserService,
+              public dialog: MatDialog,) {
   }
 
   ngOnInit() {
@@ -52,6 +64,7 @@ export class GameConstructorComponent implements OnInit {
           this.game = {
             id: data.id,
             title: data.title,
+            initial_state: data.initial_state,
             description: data.description
           };
           data.visualization.locations.forEach((elem) => {
@@ -93,15 +106,10 @@ export class GameConstructorComponent implements OnInit {
     });
   }
 
-  public setLoaded(value?: boolean) {
-    this.loaded = value === undefined ? true : value;
-  }
-
   removeNode(node: D3Node) {
     this.locationApi.doDeleteApiCall(node.id).subscribe(
       () => {
         this.nodes = this.nodes.filter(n => n.id !== node.id);
-        console.log(this.links.length);
         this.links = this.links.filter((n) => {
           return n.source.id !== node.id && n.target.id !== node.id
         });
@@ -134,8 +142,10 @@ export class GameConstructorComponent implements OnInit {
           source: this.transitionNode.id,
           target: node.id,
           game: this.game.id,
-          condition: {},
-          state: {},
+          condition: '',
+          condition_rules: {},
+          state: '',
+          state_rules: {},
           position: 1,
           weight: 0,
           is_visible: true,
@@ -150,7 +160,7 @@ export class GameConstructorComponent implements OnInit {
     }
     const dialogRef = this.dialog.open(NodePropertiesComponent, {
       width: '450px',
-      data: node.metadata
+      data: node.metadata,
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -176,7 +186,10 @@ export class GameConstructorComponent implements OnInit {
 
     const dialogRef = this.dialog.open(LinkPropertiesComponent, {
       width: '450px',
-      data: link.metadata
+      data: {
+        ...link.metadata,
+        states: Object.keys(this.game.initial_state)
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -193,6 +206,38 @@ export class GameConstructorComponent implements OnInit {
           );
       }
     });
+  }
+
+  public addStatement() {
+    if (this.state_name && this.state_name.trim().length > 0) {
+      const statement = this.state_name.trim();
+      this.game.initial_state[statement] = {description: '', value: null};
+      this.api.doUpdateApiCall(this.game.id, {initial_state: this.game.initial_state})
+        .subscribe(
+          (data: IGame) => this.game = data
+        );
+      this.state_name = '';
+    }
+  }
+
+  public stateChanged(result: IStateChanges) {
+    if (result) {
+      if (result.data.deleted) {
+        delete this.game.initial_state[result.field];
+      } else {
+        if (result.field !== result.data.statement) {
+          delete this.game.initial_state[result.field];
+        }
+        this.game.initial_state[result.data.statement] = {
+          value: result.data.value,
+          description: result.data.description
+        }
+      }
+      this.api.doUpdateApiCall(this.game.id, {initial_state: this.game.initial_state})
+        .subscribe(
+          (data: IGame) => this.game = data
+        );
+    }
   }
 
 }

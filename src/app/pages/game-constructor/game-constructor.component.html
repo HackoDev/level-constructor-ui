@@ -8,14 +8,27 @@
     Location
   </button>&nbsp;
   <button mat-button color="primary" (click)="toggleTransitionMode()">
-    <ng-container *ngIf="!isTransitionMode()">Define New Transition</ng-container>
-    <ng-container *ngIf="isTransitionMode()">Disable Transition Mode</ng-container>
+    <ng-container *ngIf="!isTransitionMode()">Define New Transition
+    </ng-container>
+    <ng-container *ngIf="isTransitionMode()">Disable Transition Mode
+    </ng-container>
   </button>
 </div>
 
 <div *ngIf="isTransitionMode()"></div>
 <div *ngIf="loaded">
   <h2>{{ game.title}}</h2>
+  <div>
+    <form (ngSubmit)="addStatement()">
+      <mat-form-field class="example-full-width">
+        <input matInput type="text" placeholder="New Statement"
+               name="state_name" [(ngModel)]="state_name"/>
+      </mat-form-field>
+      <button mat-stroked-button color="primary">Add Statement</button>
+    </form>
+    <app-game-state [state]="game.initial_state"
+                    (stateChanged)="stateChanged($event)"></app-game-state>
+  </div>
   <graph *ngIf="loaded"
          [transitionMode]="transitionMode"
          [nodes]="nodes" [links]="links"

@@ -1,0 +1,8 @@
+<ul>
+  <li *ngFor="let field of getFields();">
+    <strong class="property-name">{{ field }}</strong>:
+    <em class="property-value" (click)="editField(field)">
+      {{ state[field].value || 'undefined' }}
+    </em>
+  </li>
+</ul>

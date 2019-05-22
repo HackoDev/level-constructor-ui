@@ -2,7 +2,6 @@ import { EventEmitter } from '@angular/core';
 import { D3Link } from './link';
 import { D3Node } from './node';
 import * as d3 from 'd3';
-import { Subject } from "rxjs";
 
 const FORCES = {
   LINKS: 1 / 50,

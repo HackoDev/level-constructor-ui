@@ -24,6 +24,7 @@ export class GameFormComponent implements OnInit {
         id: null,
         title: '',
         description: '',
+        initial_state: {}
       }
     }
   }

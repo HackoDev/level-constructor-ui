@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GamesApiService } from "../../services/api";
 import { GenericPaginator } from "../../services/paginator";
-import { IGame } from "../../models";
+import { IGame, IConfig } from "../../models";
 
 @Component({
   selector: 'app-games',

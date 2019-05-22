@@ -1,6 +1,6 @@
 <h1 mat-dialog-title>Transition: {{ instance.id }}</h1>
 <div mat-dialog-content>
-  <p>Properties</p>
+  <h3>Properties</h3>
   <form (ngSubmit)="save(form)" #form="ngForm" id="form">
     <mat-form-field class="example-full-width">
       <input matInput type="number" placeholder="Position" required
@@ -19,16 +19,26 @@
     </div>
 
     <mat-form-field class="example-full-width">
+      <ng-container *ngIf="!isValidCondition()">Wrong expression</ng-container>
       <textarea matInput placeholder="Define a condition" required
                 [(ngModel)]="instance.condition" name="condition">
       </textarea>
     </mat-form-field>
 
-    <mat-form-field class="example-full-width">
-      <textarea matInput placeholder="Define a state" required
-                [(ngModel)]="instance.state" name="state">
-      </textarea>
-    </mat-form-field>
+    <h3>Statements</h3>
+    <div>
+      <ul>
+        <li *ngFor="let state of instance.states;">
+          {{ state }}:
+          <mat-form-field>
+            <ng-container *ngIf="!isValidStateField(state)">
+              Wrong expression
+            </ng-container>
+            <input matInput type="text" [name]="state" [(ngModel)]="instance.state[state]"/>
+          </mat-form-field>
+        </li>
+      </ul>
+    </div>
   </form>
 
 </div>

@@ -2,15 +2,23 @@ import { D3Node } from './';
 
 export interface ILinkMetadata {
   id: number;
+  game: number;
+
   source: number;
   target: number;
-  condition: any;
-  game: number;
-  state: any;
+
+  condition: string;
+  condition_rules: object;
+
+  state: object;
+  state_rules: object;
+
   position: number;
   weight: number;
   is_visible: boolean;
   meta: any;
+
+  // local usage
   deleted?: boolean;
 }
 

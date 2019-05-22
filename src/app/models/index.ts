@@ -2,6 +2,8 @@ export { IAuthObject } from './auth';
 export { IUser } from './users';
 export { IGame } from './games';
 export { IExtendedGame } from './games';
+export { IConfig } from './config';
+export { IStateChanges } from './state';
 export { ForceDirectedGraph } from './force-directed-graph';
 export { D3Node } from './node';
 export { D3Link } from './link';

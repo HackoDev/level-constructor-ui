@@ -1,0 +1,16 @@
+:host {
+  .property-name {
+    color: #0b3932;
+  }
+
+  .property-value {
+    color: lightcoral;
+    text-decoration: underline;
+    cursor: pointer;
+
+    &:hover {
+      color: green;
+      font-weight: 600;
+    }
+  }
+}
