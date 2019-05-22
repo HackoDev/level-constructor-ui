@@ -7,7 +7,7 @@ import { Component, Input } from '@angular/core';
 })
 export class ErrorListComponent {
 
-  @Input() errors: Array<string>;
+  @Input() errors: string[];
 
   constructor() {
   }

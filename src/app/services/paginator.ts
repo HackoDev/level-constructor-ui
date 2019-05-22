@@ -5,7 +5,7 @@ export interface IPaginationResponse<T> {
   count: number;
   next: string;
   previous: string;
-  results: Array<T>;
+  results: T[];
 }
 
 export class GenericPaginator<T> {
@@ -17,7 +17,7 @@ export class GenericPaginator<T> {
   private pageSize: number;
   private totalCount: number;
   private loaded: boolean;
-  public records: Array<T>;
+  public records: T[];
 
   constructor(apiClient, pageSize: number = 20) {
     this.pageSize = pageSize;
