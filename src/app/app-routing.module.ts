@@ -1,60 +1,52 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from "./pages/home/home.component";
-import { LoginComponent } from "./pages/login/login.component";
-import { GamesComponent } from "./pages/games/games.component";
-import { FormatsComponent } from "./pages/formats/formats.component";
-import { AboutComponent } from "./pages/about/about.component";
-import { GameEditComponent } from "./pages/game-edit/game-edit.component";
-import { GameConstructorComponent } from "./pages/game-constructor/game-constructor.component";
-import { GameAddComponent } from "./pages/game-add/game-add.component";
+import * as appComponents from './pages';
 import { AuthGuardService } from "./services/auth";
-import { LogoutComponent } from "./pages";
 
 
 export const appRoutes: Routes = [
   {
     path: '',
-    component: HomeComponent,
+    component: appComponents.GamesComponent,
     canActivate: [AuthGuardService]
   },
   {
-    path: 'games',
-    component: GamesComponent,
+    path: 'settings',
+    component: appComponents.SettingsComponent,
     canActivate: [AuthGuardService]
   },
   {
     path: 'games/:id/edit',
-    component: GameEditComponent,
+    component: appComponents.GameEditComponent,
     canActivate: [AuthGuardService]
   },
   {
     path: 'games/add',
-    component: GameAddComponent,
+    component: appComponents.GameAddComponent,
     canActivate: [AuthGuardService]
   },
   {
     path: 'games/:id/constructor',
-    component: GameConstructorComponent,
+    component: appComponents.GameConstructorComponent,
     canActivate: [AuthGuardService]
   },
   {
     path: 'formats',
-    component: FormatsComponent,
+    component: appComponents.FormatsComponent,
     canActivate: [AuthGuardService]
   },
   {
     path: 'about',
-    component: AboutComponent,
+    component: appComponents.AboutComponent,
     canActivate: [AuthGuardService]
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: appComponents.LoginComponent
   },
   {
     path: 'logout',
-    component: LogoutComponent
+    component: appComponents.LogoutComponent
   }
 ];
 

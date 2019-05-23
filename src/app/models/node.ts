@@ -1,9 +1,14 @@
+export enum TransitionType {
+  DEFAULT,
+  START,
+  FINISH
+}
+
 export interface INodeMetadata {
   id: number;
   name: string;
   description: string;
-  is_start: boolean;
-  is_finish: boolean;
+  type: TransitionType;
   meta: object;
   deleted?: boolean;
 }

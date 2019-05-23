@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { D3Node } from "../../models";
+import { TransitionType } from "../../models/node";
 
 @Component({
   selector: '[nodeVisual]',
@@ -8,7 +9,7 @@ import { D3Node } from "../../models";
            (click)="clickHandler()">
       <svg:circle
         class="node"
-        fill="rgb(0,106,197)"
+        [attr.fill]="getColor()"
         cx="0" cy="0"
         r="10px">
       </svg:circle>
@@ -27,5 +28,15 @@ export class NodeVisualComponent {
 
   public clickHandler() {
     this.selected.emit(this.node);
+  }
+
+  public getColor() {
+    if (this.node.metadata.type == TransitionType.START) {
+      return 'rgb(250,246,6)';
+    }
+    if (this.node.metadata.type == TransitionType.FINISH) {
+      return 'rgb(0,168,45)';
+    }
+    return 'rgb(0,106,197)';
   }
 }

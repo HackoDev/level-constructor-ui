@@ -3,14 +3,19 @@
     color: #0b3932;
   }
 
-  .property-value {
-    color: lightcoral;
-    text-decoration: underline;
+  li {
     cursor: pointer;
+    padding: 10px;
 
     &:hover {
-      color: green;
-      font-weight: 600;
+      background: lightblue;
+    }
+
+    .property-value {
+      color: lightcoral;
+      text-decoration: underline;
+      font-style: normal;
+      cursor: pointer;
     }
   }
 }

@@ -31,7 +31,7 @@ import * as appDirectives from "./directives";
     appComponents.GameStateComponent,
     appComponents.StateFormPropertyComponent,
 
-    appPages.HomeComponent,
+    appPages.SettingsComponent,
     appPages.GamesComponent,
     appPages.AboutComponent,
     appPages.FormatsComponent,
@@ -70,6 +70,7 @@ import * as appDirectives from "./directives";
     materialModules.MatCommonModule,
     materialModules.MatInputModule,
     materialModules.MatDialogModule,
+    materialModules.MatRadioModule,
 
     AppRoutingModule,
   ],

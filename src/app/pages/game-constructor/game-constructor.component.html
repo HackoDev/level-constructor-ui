@@ -1,24 +1,12 @@
-<h1>Game Constructor</h1>
+<h1>Game Constructor<ng-container *ngIf="loaded">: {{ game.title }}</ng-container></h1>
 <a mat-stroked-button routerLink="/games">Back</a>
 
 <br>
-<br>
-<div class="example-button-row">
-  <button mat-raised-button color="primary" (click)="locationDialog()">Add
-    Location
-  </button>&nbsp;
-  <button mat-button color="primary" (click)="toggleTransitionMode()">
-    <ng-container *ngIf="!isTransitionMode()">Define New Transition
-    </ng-container>
-    <ng-container *ngIf="isTransitionMode()">Disable Transition Mode
-    </ng-container>
-  </button>
-</div>
 
 <div *ngIf="isTransitionMode()"></div>
 <div *ngIf="loaded">
-  <h2>{{ game.title}}</h2>
   <div>
+    <h2>Statement Config</h2>
     <form (ngSubmit)="addStatement()">
       <mat-form-field class="example-full-width">
         <input matInput type="text" placeholder="New Statement"
@@ -29,6 +17,19 @@
     <app-game-state [state]="game.initial_state"
                     (stateChanged)="stateChanged($event)"></app-game-state>
   </div>
+  <h2>Visualization</h2>
+  <div class="example-button-row">
+    <button mat-raised-button color="primary" (click)="locationDialog()">Add
+      Location
+    </button>&nbsp;
+    <button mat-button color="primary" (click)="toggleTransitionMode()">
+      <ng-container *ngIf="!isTransitionMode()">Define New Transition
+      </ng-container>
+      <ng-container *ngIf="isTransitionMode()">Disable Transition Mode
+      </ng-container>
+    </button>
+  </div>
+  <br>
   <graph *ngIf="loaded"
          [transitionMode]="transitionMode"
          [nodes]="nodes" [links]="links"

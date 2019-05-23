@@ -34,7 +34,8 @@
             <ng-container *ngIf="!isValidStateField(state)">
               Wrong expression
             </ng-container>
-            <input matInput type="text" [name]="state" [(ngModel)]="instance.state[state]"/>
+            <input matInput type="text" [name]="state"
+                   [(ngModel)]="instance.state[state]"/>
           </mat-form-field>
         </li>
       </ul>

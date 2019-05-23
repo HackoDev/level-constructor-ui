@@ -8,20 +8,19 @@
     </mat-form-field>
 
     <div>
-      <mat-checkbox name="is_start" [(ngModel)]="instance.is_start">
-        Start
-      </mat-checkbox>
+      <label id="example-radio-group-label">Type</label>
+      <mat-radio-group aria-labelledby="example-radio-group-label"
+                       name="type" class="example-radio-group"
+                       [(ngModel)]="instance.type">
+        <mat-radio-button class="example-radio-button"
+                          *ngFor="let type of types" [value]="type">
+          {{ getTransitionType(type) }}
+        </mat-radio-button>
+      </mat-radio-group>
     </div>
-
-    <div>
-      <mat-checkbox name="is_finish" [(ngModel)]="instance.is_finish">
-        Finish
-      </mat-checkbox>
-    </div>
-
     <mat-form-field class="example-full-width">
       <textarea matInput placeholder="Leave a description" required
-                [(ngModel)]="instance.description" required name="description">
+                [(ngModel)]="instance.description" name="description">
       </textarea>
     </mat-form-field>
   </form>

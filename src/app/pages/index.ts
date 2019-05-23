@@ -1,4 +1,4 @@
-export { HomeComponent } from './home/home.component';
+export { SettingsComponent } from './settings/settings.component';
 export { GamesComponent } from './games/games.component';
 export { AboutComponent } from './about/about.component';
 export { FormatsComponent } from './formats/formats.component';

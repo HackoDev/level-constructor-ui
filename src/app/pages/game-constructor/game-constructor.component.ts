@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
 import {
-  ConfigApiService,
   GamesApiService,
   LocationsApiService,
   TransitionsApiService
@@ -9,7 +8,6 @@ import {
 import {
   D3Link,
   D3Node,
-  IConfig,
   IExtendedGame,
   IGame,
   IStateChanges
@@ -20,7 +18,7 @@ import {
   NodePropertiesComponent
 } from "../../components";
 import { MatDialog } from "@angular/material";
-import { INodeMetadata } from "../../models/node";
+import { INodeMetadata, TransitionType } from "../../models/node";
 import { ILinkMetadata } from "../../models/link";
 import { ParserService } from "../../services/parser.service";
 
@@ -144,7 +142,7 @@ export class GameConstructorComponent implements OnInit {
           game: this.game.id,
           condition: '',
           condition_rules: {},
-          state: '',
+          state: {},
           state_rules: {},
           position: 1,
           weight: 0,
@@ -172,6 +170,13 @@ export class GameConstructorComponent implements OnInit {
           (resp: INodeMetadata) => {
             node.title = resp.name;
             node.metadata = resp;
+            if (resp.type == TransitionType.START) {
+              this.nodes.forEach(i => {
+                if (i.id != resp.id && i.metadata.type == TransitionType.START) {
+                  i.metadata.type = TransitionType.DEFAULT;
+                }
+              });
+            }
             this.graphChild.graph.ticker.emit(this.graphChild.graph.simulation);
           }
         );

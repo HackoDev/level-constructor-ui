@@ -1,8 +1,6 @@
 <ul>
-  <li *ngFor="let field of getFields();">
+  <li *ngFor="let field of getFields();" (click)="editField(field)">
     <strong class="property-name">{{ field }}</strong>:
-    <em class="property-value" (click)="editField(field)">
-      {{ state[field].value || 'undefined' }}
-    </em>
+    <em class="property-value">{{ state[field].value || 'undefined' }}</em>
   </li>
 </ul>

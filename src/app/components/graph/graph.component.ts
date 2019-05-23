@@ -14,17 +14,19 @@ import { D3Service } from '../../services/d3.service';
   selector: 'graph',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <svg #svg [attr.width]="_options.width" [attr.height]="_options.height">
-      <g [zoomableOf]="svg">
-        <g [linkVisual]="link" *ngFor="let link of links"
-           (deleted)="removeLink($event)" 
-           (selected)="selectedLink($event)"></g>
-        <g [nodeVisual]="node" *ngFor="let node of nodes"
-           (deleted)="removeNode($event)"
-           (selected)="selectedNode($event)"
-           [draggableNode]="node" [draggableInGraph]="graph"></g>
-      </g>
-    </svg>
+    <div class="wrapper">
+      <svg #svg [attr.width]="_options.width" [attr.height]="_options.height">
+        <g [zoomableOf]="svg">
+          <g [linkVisual]="link" *ngFor="let link of links"
+             (deleted)="removeLink($event)"
+             (selected)="selectedLink($event)"></g>
+          <g [nodeVisual]="node" *ngFor="let node of nodes"
+             (deleted)="removeNode($event)"
+             (selected)="selectedNode($event)"
+             [draggableNode]="node" [draggableInGraph]="graph"></g>
+        </g>
+      </svg>
+    </div>
   `,
   styleUrls: ['./graph.component.css']
 })
@@ -38,7 +40,7 @@ export class GraphComponent implements OnInit, AfterViewInit {
   @Output() linkSelected: EventEmitter<D3Node> = new EventEmitter<D3Node>();
 
   public graph: ForceDirectedGraph;
-  private _options: { width, height } = {width: 800, height: 600};
+  private _options: { width, height } = {width: 1000, height: 600};
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
@@ -69,7 +71,7 @@ export class GraphComponent implements OnInit, AfterViewInit {
 
   get options() {
     return this._options = {
-      width: 600,
+      width: 1000,
       height: 400
     };
   }
