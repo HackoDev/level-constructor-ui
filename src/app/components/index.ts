@@ -9,3 +9,4 @@ export { NodePropertiesComponent } from './node-properties/node-properties.compo
 export { LinkPropertiesComponent } from './link-properties/link-properties.component';
 export { GameStateComponent } from './game-state/game-state.component';
 export { StateFormPropertyComponent } from './state-form-property/state-form-property.component';
+export { FooterComponent } from './footer/footer.component';

@@ -16,8 +16,15 @@ import { D3Service } from '../../services/d3.service';
   template: `
     <div class="wrapper">
       <svg #svg [attr.width]="_options.width" [attr.height]="_options.height">
+        <defs>
+          <marker id="end" viewBox="0 -5 10 10" refX="16" refY="-0.2"
+                  markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M0,-5L10,0L0,5"></path>
+          </marker>
+        </defs>
         <g [zoomableOf]="svg">
           <g [linkVisual]="link" *ngFor="let link of links"
+             marker-end="url(#end)"
              (deleted)="removeLink($event)"
              (selected)="selectedLink($event)"></g>
           <g [nodeVisual]="node" *ngFor="let node of nodes"

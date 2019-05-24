@@ -21,6 +21,7 @@ import * as appDirectives from "./directives";
   declarations: [
     appComponents.AppComponent,
     appComponents.NavbarComponent,
+    appComponents.FooterComponent,
     appComponents.GameFormComponent,
     appComponents.ErrorListComponent,
     appComponents.NodeVisualComponent,

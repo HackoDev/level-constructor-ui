@@ -88,8 +88,7 @@ export class GameConstructorComponent implements OnInit {
         id: null,
         name: 'New Location',
         description: '',
-        is_start: false,
-        is_finish: false
+        type: TransitionType.DEFAULT
       }
     });
 
