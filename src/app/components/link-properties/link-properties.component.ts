@@ -29,12 +29,6 @@ export class LinkPropertiesComponent {
 
   save(form: NgForm): void {
     if (form.valid) {
-      for (let key of this.instance.states) {
-        if (!this.instance.state_rules[key]) {
-          delete this.instance.state[key];
-          delete this.instance.state_rules[key];
-        }
-      }
       this.dialogRef.close(this.instance);
     }
   }

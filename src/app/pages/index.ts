@@ -7,3 +7,4 @@ export { GameConstructorComponent } from './game-constructor/game-constructor.co
 export { GameAddComponent } from './game-add/game-add.component';
 export { LoginComponent } from './login/login.component';
 export { LogoutComponent } from './logout/logout.component';
+export { OnlineRulesComponent } from './online-rules/online-rules.component';

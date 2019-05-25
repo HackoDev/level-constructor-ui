@@ -1,52 +1,57 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import * as appComponents from './pages';
+import * as appPages from './pages';
 import { AuthGuardService } from "./services/auth";
 
 
 export const appRoutes: Routes = [
   {
     path: '',
-    component: appComponents.GamesComponent,
+    component: appPages.GamesComponent,
     canActivate: [AuthGuardService]
   },
   {
     path: 'settings',
-    component: appComponents.SettingsComponent,
+    component: appPages.SettingsComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'online-rules',
+    component: appPages.OnlineRulesComponent,
     canActivate: [AuthGuardService]
   },
   {
     path: 'games/:id/edit',
-    component: appComponents.GameEditComponent,
+    component: appPages.GameEditComponent,
     canActivate: [AuthGuardService]
   },
   {
     path: 'games/add',
-    component: appComponents.GameAddComponent,
+    component: appPages.GameAddComponent,
     canActivate: [AuthGuardService]
   },
   {
     path: 'games/:id/constructor',
-    component: appComponents.GameConstructorComponent,
+    component: appPages.GameConstructorComponent,
     canActivate: [AuthGuardService]
   },
   {
     path: 'formats',
-    component: appComponents.FormatsComponent,
+    component: appPages.FormatsComponent,
     canActivate: [AuthGuardService]
   },
   {
     path: 'about',
-    component: appComponents.AboutComponent,
+    component: appPages.AboutComponent,
     canActivate: [AuthGuardService]
   },
   {
     path: 'login',
-    component: appComponents.LoginComponent
+    component: appPages.LoginComponent
   },
   {
     path: 'logout',
-    component: appComponents.LogoutComponent
+    component: appPages.LogoutComponent
   }
 ];
 

@@ -17,6 +17,7 @@ import * as apiServices from './services/api';
 import * as authServices from './services/auth';
 import * as appDirectives from "./directives";
 
+
 @NgModule({
   declarations: [
     appComponents.AppComponent,
@@ -41,6 +42,7 @@ import * as appDirectives from "./directives";
     appPages.GameConstructorComponent,
     appPages.GameAddComponent,
     appPages.LogoutComponent,
+    appPages.OnlineRulesComponent,
 
     appDirectives.ZoomableDirective,
     appDirectives.DraggableDirective,
@@ -72,6 +74,7 @@ import * as appDirectives from "./directives";
     materialModules.MatInputModule,
     materialModules.MatDialogModule,
     materialModules.MatRadioModule,
+    materialModules.MatSelectModule,
 
     AppRoutingModule,
   ],

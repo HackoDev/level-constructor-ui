@@ -28,4 +28,11 @@ export class ParserService {
     return this.stateParser.parse(expression);
   }
 
+  public generate(expression) {
+    return pegJs.generate(expression);
+  }
+
+  public getConfig(): object {
+    return {...this.config};
+  }
 }
