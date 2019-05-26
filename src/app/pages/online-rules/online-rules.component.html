@@ -9,7 +9,9 @@
   </mat-form-field>
   <div>
     <pre [innerText]="resultInstance | json"></pre>
-    <button mat-flat-button color="primary" type="button">Check</button>
+    <button mat-flat-button color="primary"
+            (click)="build()" type="button">Check
+    </button>
   </div>
   <br>
   <div>

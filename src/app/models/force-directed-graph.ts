@@ -69,7 +69,7 @@ export class ForceDirectedGraph {
       this.simulation = d3.forceSimulation()
         .force('charge',
           d3.forceManyBody()
-            .strength(d => FORCES.CHARGE * 15)
+            .strength(d => FORCES.CHARGE * 25)
         )
         .force('collide',
           d3.forceCollide()
