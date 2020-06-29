@@ -4,32 +4,19 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
-import { LayoutModule } from '@angular/cdk/layout';
-import { environment } from '../environments/environment';
+import { environment } from '@env';
+
+import { NgxSvgModule } from 'ngx-svg';
+import { NgxGraphModule } from '@swimlane/ngx-graph';
+import { TooltipModule } from '@swimlane/ngx-charts';
+import { MaterialModule } from '../material/app.module';
+
 import { AppRoutingModule } from './app-routing.module';
 import * as appComponents from './components';
 import * as appPages from './pages';
 import { ParserService } from './services/parser.service';
 import * as apiServices from './services/api';
 import * as authServices from './services/auth';
-import { MatButtonModule } from '@angular/material/button';
-import { MatSelectModule } from '@angular/material/select';
-import { MatRadioModule } from '@angular/material/radio';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatIconModule } from '@angular/material/icon';
-import { MatListModule } from '@angular/material/list';
-import { MatMenuModule } from '@angular/material/menu';
-import { MatGridListModule } from '@angular/material/grid-list';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatCommonModule } from '@angular/material/core';
-import { MatInputModule } from '@angular/material/input';
-import { MatDialogModule } from '@angular/material/dialog';
-import { NgxSvgModule } from 'ngx-svg';
-import { MatSliderModule } from '@angular/material/slider';
-import { NgxGraphModule } from '@swimlane/ngx-graph';
-import { TooltipModule } from '@swimlane/ngx-charts';
 
 
 @NgModule({
@@ -62,33 +49,16 @@ import { TooltipModule } from '@swimlane/ngx-charts';
     BrowserAnimationsModule,
     BrowserModule,
     RouterModule,
-    LayoutModule,
+    MaterialModule,
 
     HttpClientXsrfModule.withOptions({
-      cookieName: environment.csrfCookieName,
-      headerName: environment.csrfHeaderName,
+      cookieName: 'csrftoken',
+      headerName: 'X-CSRFToken',
     }),
-
-    MatButtonModule,
-    MatCheckboxModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
-    MatMenuModule,
-    MatGridListModule,
-    MatFormFieldModule,
-    MatCommonModule,
-    MatInputModule,
-    MatDialogModule,
-    MatRadioModule,
-    MatSelectModule,
 
     NgxSvgModule,
     NgxGraphModule,
-
     AppRoutingModule,
-    MatSliderModule,
     TooltipModule,
   ],
   entryComponents: [

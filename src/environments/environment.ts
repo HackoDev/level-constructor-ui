@@ -4,8 +4,6 @@
 
 export const environment = {
   production: false,
-  csrfCookieName: 'csrftoken',
-  csrfHeaderName: 'X-CSRFToken',
 };
 
 /*
