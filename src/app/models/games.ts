@@ -10,8 +10,8 @@ export interface IGame {
 
 
 interface IVisualization {
-  transitions: ILinkMetadata[],
-  locations: INodeMetadata[]
+  transitions: ILinkMetadata[];
+  locations: INodeMetadata[];
 }
 
 export interface IExtendedGame extends IGame {

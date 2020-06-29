@@ -1,3 +1,4 @@
+
 export enum TransitionType {
   DEFAULT,
   START,
@@ -7,9 +8,12 @@ export enum TransitionType {
 export interface INodeMetadata {
   id: number;
   name: string;
+  label: string;
+  level: any;
   description: string;
   type: TransitionType;
   meta: object;
+  weight: number;
   deleted?: boolean;
 }
 

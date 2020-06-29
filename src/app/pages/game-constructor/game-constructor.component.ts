@@ -1,26 +1,22 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import * as shape from 'd3-shape';
 import {
   GamesApiService,
   LocationsApiService,
   TransitionsApiService
-} from "../../services/api";
+} from '../../services/api';
+import { IExtendedGame, IGame, IStateChanges } from '../../models';
 import {
-  D3Link,
-  D3Node,
-  IExtendedGame,
-  IGame,
-  IStateChanges
-} from "../../models";
-import {
-  GraphComponent,
   LinkPropertiesComponent,
   NodePropertiesComponent
-} from "../../components";
-import { MatDialog } from "@angular/material";
-import { INodeMetadata, TransitionType } from "../../models/node";
-import { ILinkMetadata } from "../../models/link";
-import { ParserService } from "../../services/parser.service";
+} from '../../components';
+import { MatDialog } from '@angular/material/dialog';
+import { INodeMetadata, TransitionType } from '../../models/node';
+import { ILinkMetadata } from '../../models/link';
+import { ParserService } from '../../services/parser.service';
+import { Node } from '@swimlane/ngx-graph';
+
 
 @Component({
   selector: 'app-game-constructor',
@@ -28,24 +24,22 @@ import { ParserService } from "../../services/parser.service";
   styleUrls: ['./game-constructor.component.scss']
 })
 export class GameConstructorComponent implements OnInit {
-
-  @ViewChild(GraphComponent) graphChild: GraphComponent;
-
+  public curve: any = shape.curveBundle.beta(1);
   public game: IGame = null;
-  public loaded: boolean = false;
-  public transitionMode: boolean = false;
-  public transitionNode: D3Node = null;
-  public state_name: string = '';
+  public loaded = false;
+  public transitionMode = false;
+  public transitionNode: ILinkMetadata = null;
+  public stateName = '';
 
-  public nodes: D3Node[] = [];
-  public links: D3Link[] = [];
+  public nodes: any[] = [];
+  public links: any[] = [];
 
   constructor(private route: ActivatedRoute,
               private api: GamesApiService,
               private locationApi: LocationsApiService,
               private transitionApi: TransitionsApiService,
               public parser: ParserService,
-              public dialog: MatDialog,) {
+              public dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -65,20 +59,24 @@ export class GameConstructorComponent implements OnInit {
             initial_state: data.initial_state,
             description: data.description
           };
-          data.visualization.locations.forEach((elem) => {
-            this.nodes.push(new D3Node(elem.id, elem.name, elem));
+          this.nodes = data.visualization.locations.map(elem => {
+            return Object.assign(elem, {position: {x: 245, y: 90}});
           });
-          data.visualization.transitions.forEach((elem) => {
-            this.links.push(new D3Link(elem.source, elem.target, elem));
+          this.links = data.visualization.transitions.map(e => {
+            e.id = `l${e.id}`;
+            return e;
           });
           this.loaded = true;
         },
         (response) => {
           this.loaded = true;
         }
-      )
+      );
     });
+  }
 
+  public getTooltip(node: any) {
+    return `<h2>${node.name}</h2> <p>${node.description}</p>`;
   }
 
   public locationDialog(): void {
@@ -103,20 +101,22 @@ export class GameConstructorComponent implements OnInit {
     });
   }
 
-  removeNode(node: D3Node) {
+  removeNode(node: INodeMetadata) {
     this.locationApi.doDeleteApiCall(node.id).subscribe(
       () => {
-        this.nodes = this.nodes.filter(n => n.id !== node.id);
-        this.links = this.links.filter((n) => {
-          return n.source.id !== node.id && n.target.id !== node.id
+        this.links = this.links.filter((l) => {
+          return l.source !== node.id && l.target !== node.id;
         });
+        this.nodes = this.nodes.filter(n => n.id !== node.id);
       }
     );
   }
 
-  removeLink(link: D3Link) {
-    this.links = this.links.filter((n) => {
-      return n.metadata.id !== link.metadata.id
+  removeLink(link: ILinkMetadata) {
+    this.transitionApi.doDeleteApiCall(link.id.replace('l', '')).subscribe(() => {
+      this.links = this.links.filter((n) => {
+        return n.id !== link.id;
+      });
     });
   }
 
@@ -128,14 +128,14 @@ export class GameConstructorComponent implements OnInit {
     return this.transitionMode;
   }
 
-  nodeSelected(node: D3Node): void {
+  nodeSelected(node): void {
     if (this.transitionMode) {
-      console.log(node);
       if (this.transitionNode === null) {
         this.transitionNode = node;
       } else {
         const transition: ILinkMetadata = {
           id: null,
+          label: '',
           source: this.transitionNode.id,
           target: node.id,
           game: this.game.id,
@@ -157,7 +157,7 @@ export class GameConstructorComponent implements OnInit {
     }
     const dialogRef = this.dialog.open(NodePropertiesComponent, {
       width: '450px',
-      data: node.metadata,
+      data: node,
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -167,23 +167,22 @@ export class GameConstructorComponent implements OnInit {
         }
         this.locationApi.doUpdateApiCall(node.id, result).subscribe(
           (resp: INodeMetadata) => {
-            node.title = resp.name;
-            node.metadata = resp;
-            if (resp.type == TransitionType.START) {
+            node.name = resp.name;
+            Object.assign(node, resp);
+            if (resp.type === TransitionType.START) {
               this.nodes.forEach(i => {
-                if (i.id != resp.id && i.metadata.type == TransitionType.START) {
+                if (i.id !== resp.id && i.metadata.type === TransitionType.START) {
                   i.metadata.type = TransitionType.DEFAULT;
                 }
               });
             }
-            this.graphChild.graph.ticker.emit(this.graphChild.graph.simulation);
           }
         );
       }
     });
   }
 
-  linkSelected(link: D3Link): void {
+  linkSelected(link: ILinkMetadata): void {
     if (this.transitionMode) {
       return;
     }
@@ -191,7 +190,7 @@ export class GameConstructorComponent implements OnInit {
     const dialogRef = this.dialog.open(LinkPropertiesComponent, {
       width: '450px',
       data: {
-        ...link.metadata,
+        ...link,
         states: Object.keys(this.game.initial_state)
       }
     });
@@ -201,11 +200,10 @@ export class GameConstructorComponent implements OnInit {
         if (result.deleted) {
           return this.removeLink(link);
         }
-        this.transitionApi.doUpdateApiCall(link.metadata.id, result)
+        this.transitionApi.doUpdateApiCall(link.id.replace('l', ''), result)
           .subscribe(
             (data: ILinkMetadata) => {
-              link.metadata = data;
-              this.graphChild.graph.ticker.emit(this.graphChild.graph.simulation);
+              Object.assign(link, data, {id: link.id});
             }
           );
       }
@@ -213,14 +211,14 @@ export class GameConstructorComponent implements OnInit {
   }
 
   public addStatement() {
-    if (this.state_name && this.state_name.trim().length > 0) {
-      const statement = this.state_name.trim();
+    if (this.stateName && this.stateName.trim().length > 0) {
+      const statement = this.stateName.trim();
       this.game.initial_state[statement] = {description: '', value: null};
       this.api.doUpdateApiCall(this.game.id, {initial_state: this.game.initial_state})
         .subscribe(
           (data: IGame) => this.game = data
         );
-      this.state_name = '';
+      this.stateName = '';
     }
   }
 
@@ -235,7 +233,7 @@ export class GameConstructorComponent implements OnInit {
         this.game.initial_state[result.data.statement] = {
           value: result.data.value,
           description: result.data.description
-        }
+        };
       }
       this.api.doUpdateApiCall(this.game.id, {initial_state: this.game.initial_state})
         .subscribe(

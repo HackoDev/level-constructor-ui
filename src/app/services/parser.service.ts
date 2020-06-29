@@ -1,7 +1,7 @@
 import * as pegJs from 'pegjs';
-import { Injectable } from "@angular/core";
-import { ConfigApiService } from "./api";
-import { IConfig } from "../models";
+import { Injectable } from '@angular/core';
+import { ConfigApiService } from './api';
+import { IConfig } from '../models';
 
 @Injectable()
 export class ParserService {

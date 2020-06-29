@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ParserService } from "../../services/parser.service";
+import { ParserService } from '../../services/parser.service';
 
 @Component({
   selector: 'app-online-rules',
@@ -9,7 +9,7 @@ import { ParserService } from "../../services/parser.service";
 export class OnlineRulesComponent implements OnInit {
 
   public expression: string;
-  public rules: string = '';
+  public rules = '';
   private compiledParser: any = null;
   public resultInstance: object = null;
   public errors: string;

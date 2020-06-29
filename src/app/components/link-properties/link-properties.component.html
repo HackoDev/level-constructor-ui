@@ -2,13 +2,13 @@
 <div mat-dialog-content>
   <h3>Properties</h3>
   <form (ngSubmit)="save(form)" #form="ngForm" id="form">
-    <mat-form-field class="example-full-width">
-      <input matInput type="number" placeholder="Position" required
-             name="position" [(ngModel)]="instance.position">
+    <mat-form-field class="example-label">
+      <input matInput type="text" placeholder="Label" required
+             name="label" [(ngModel)]="instance.label">
     </mat-form-field>
 
-    <mat-form-field class="example-full-width">
-      <input matInput type="number" placeholder="Weight" required
+    <mat-form-field class="weight">
+      <input matInput type="text" placeholder="Weight" required
              name="weight" [(ngModel)]="instance.weight">
     </mat-form-field>
 
@@ -20,7 +20,7 @@
 
     <mat-form-field class="example-full-width">
       <ng-container *ngIf="!isValidCondition()">Wrong expression</ng-container>
-      <textarea matInput placeholder="Define a condition" required
+      <textarea matInput placeholder="Define a condition"
                 [(ngModel)]="instance.condition" name="condition">
       </textarea>
     </mat-form-field>

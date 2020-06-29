@@ -1,9 +1,9 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
-import { NodePropertiesDialogData } from "../../models";
-import { NgForm } from "@angular/forms";
-import { TransitionType } from "../../models/node";
+import { NodePropertiesDialogData } from '../../models';
+import { NgForm } from '@angular/forms';
+import { TransitionType } from '../../models/node';
 
 @Component({
   selector: 'app-node-properties',

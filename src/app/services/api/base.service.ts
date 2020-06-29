@@ -1,6 +1,6 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 
 @Injectable()
@@ -24,7 +24,7 @@ export abstract class BaseAPIService {
       limit: pageSize.toString(),
       offset: ((pageNumber - 1) * pageSize).toString(),
     };
-    return this.client.get(this.getListUrl(), {params: params});
+    return this.client.get(this.getListUrl(), {params});
   }
 
   public doCreateApiCall(params: object) {

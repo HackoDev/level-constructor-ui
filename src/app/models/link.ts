@@ -1,7 +1,8 @@
 import { D3Node } from './';
 
 export interface ILinkMetadata {
-  id: number;
+  id: any;
+  label: string;
   game: number;
 
   source: number;

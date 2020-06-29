@@ -1,9 +1,9 @@
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { NgForm } from "@angular/forms";
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { NgForm } from '@angular/forms';
 
-import { LinkPropertiesDialogData } from "../../models";
-import { ParserService } from "../../services/parser.service";
+import { LinkPropertiesDialogData } from '../../models';
+import { ParserService } from '../../services/parser.service';
 
 @Component({
   selector: 'app-link-properties',
@@ -40,9 +40,9 @@ export class LinkPropertiesComponent {
 
   isValidCondition() {
     try {
-      this.instance.condition_rules = this.parser.buildBoolExpression(this.instance.condition)
+      this.instance.condition_rules = this.parser.buildBoolExpression(this.instance.condition);
     } catch (e) {
-      this.instance.condition_rules = null;
+      this.instance.condition_rules = {};
     }
     return !!this.instance.condition_rules;
   }

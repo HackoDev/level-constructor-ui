@@ -1,21 +1,35 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { RouterModule } from "@angular/router";
-import { HttpClientModule, HttpClientXsrfModule } from "@angular/common/http";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 import { LayoutModule } from '@angular/cdk/layout';
-import * as materialModules from '@angular/material';
-
-import { environment } from "../environments/environment";
-import { AppRoutingModule } from "./app-routing.module";
+import { environment } from '../environments/environment';
+import { AppRoutingModule } from './app-routing.module';
 import * as appComponents from './components';
 import * as appPages from './pages';
-import { D3Service } from './services/d3.service';
-import { ParserService } from "./services/parser.service";
+import { ParserService } from './services/parser.service';
 import * as apiServices from './services/api';
 import * as authServices from './services/auth';
-import * as appDirectives from "./directives";
+import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCommonModule } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog';
+import { NgxSvgModule } from 'ngx-svg';
+import { MatSliderModule } from '@angular/material/slider';
+import { NgxGraphModule } from '@swimlane/ngx-graph';
+import { TooltipModule } from '@swimlane/ngx-charts';
 
 
 @NgModule({
@@ -25,9 +39,6 @@ import * as appDirectives from "./directives";
     appComponents.FooterComponent,
     appComponents.GameFormComponent,
     appComponents.ErrorListComponent,
-    appComponents.NodeVisualComponent,
-    appComponents.LinkVisualComponent,
-    appComponents.GraphComponent,
     appComponents.NodePropertiesComponent,
     appComponents.LinkPropertiesComponent,
     appComponents.GameStateComponent,
@@ -43,9 +54,6 @@ import * as appDirectives from "./directives";
     appPages.GameAddComponent,
     appPages.LogoutComponent,
     appPages.OnlineRulesComponent,
-
-    appDirectives.ZoomableDirective,
-    appDirectives.DraggableDirective,
   ],
   imports: [
     FormsModule,
@@ -61,22 +69,27 @@ import * as appDirectives from "./directives";
       headerName: environment.csrfHeaderName,
     }),
 
-    materialModules.MatButtonModule,
-    materialModules.MatCheckboxModule,
-    materialModules.MatToolbarModule,
-    materialModules.MatSidenavModule,
-    materialModules.MatIconModule,
-    materialModules.MatListModule,
-    materialModules.MatMenuModule,
-    materialModules.MatGridListModule,
-    materialModules.MatFormFieldModule,
-    materialModules.MatCommonModule,
-    materialModules.MatInputModule,
-    materialModules.MatDialogModule,
-    materialModules.MatRadioModule,
-    materialModules.MatSelectModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
+    MatMenuModule,
+    MatGridListModule,
+    MatFormFieldModule,
+    MatCommonModule,
+    MatInputModule,
+    MatDialogModule,
+    MatRadioModule,
+    MatSelectModule,
+
+    NgxSvgModule,
+    NgxGraphModule,
 
     AppRoutingModule,
+    MatSliderModule,
+    TooltipModule,
   ],
   entryComponents: [
     appComponents.NodePropertiesComponent,
@@ -89,7 +102,6 @@ import * as appDirectives from "./directives";
     apiServices.TransitionsApiService,
     apiServices.ConfigApiService,
 
-    D3Service,
     ParserService,
 
     authServices.AuthService,

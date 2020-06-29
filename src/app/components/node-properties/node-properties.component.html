@@ -2,9 +2,19 @@
 <div mat-dialog-content>
   <p>Properties</p>
   <form (ngSubmit)="save(form)" #form="ngForm" id="form">
+    <mat-form-field class="example-label">
+      <input matInput type="text" placeholder="Label" required
+             name="abel" [(ngModel)]="instance.label">
+    </mat-form-field>
+
     <mat-form-field class="example-full-width">
       <input matInput type="text" placeholder="Name" required
              name="name" [(ngModel)]="instance.name">
+    </mat-form-field>
+
+    <mat-form-field class="example-weight">
+      <input matInput type="number" placeholder="Weight" required
+             name="weight" [(ngModel)]="instance.weight">
     </mat-form-field>
 
     <div>
@@ -19,7 +29,7 @@
       </mat-radio-group>
     </div>
     <mat-form-field class="example-full-width">
-      <textarea matInput placeholder="Leave a description" required
+      <textarea matInput placeholder="Leave a description"
                 [(ngModel)]="instance.description" name="description">
       </textarea>
     </mat-form-field>

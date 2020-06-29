@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material";
-import { IStateChanges, NodePropertiesDialogData } from "../../models";
-import { NgForm } from "@angular/forms";
+import { IStateChanges } from '../../models';
+import { NgForm } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-state-form-property',

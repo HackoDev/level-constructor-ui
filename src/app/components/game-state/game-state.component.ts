@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { MatDialog } from "@angular/material";
-import { IStateChanges } from "../../models";
-import { StateFormPropertyComponent } from "../state-form-property/state-form-property.component";
+import { MatDialog } from '@angular/material/dialog';
+import { IStateChanges } from '../../models';
+import { StateFormPropertyComponent } from '../state-form-property/state-form-property.component';
 
 @Component({
   selector: 'app-game-state',
